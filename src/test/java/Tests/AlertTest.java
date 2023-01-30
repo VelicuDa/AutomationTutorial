@@ -16,6 +16,8 @@ import java.util.List;
 
 public class AlertTest extends ShareData {
 
+    public WebDriver driver;
+
     @Test
 
     public void MetodaTest() {
@@ -23,24 +25,24 @@ public class AlertTest extends ShareData {
         PageMethods pageMethods = new PageMethods(getDriver());
         AlertMethods alertMethods = new AlertMethods(getDriver());
 
-        WebElement SkipSignIn = getDriver().findElement(By.id("btn2"));
+        WebElement SkipSignIn = driver.findElement(By.id("btn2"));
         elementMethod.ClickElement(SkipSignIn);
 
-        WebElement SwitchTo = getDriver().findElement(By.xpath("//a[text()='SwitchTo']"));
+        WebElement SwitchTo = driver.findElement(By.xpath("//a[text()='SwitchTo']"));
 
         // mergem cu mouse-ul pe un anumit element
         elementMethod.MoveToElement(SwitchTo);
 
-        WebElement AlertElement = getDriver().findElement(By.xpath("//a[text()='Alerts']"));
+        WebElement AlertElement = driver.findElement(By.xpath("//a[text()='Alerts']"));
         elementMethod.ClickElement(AlertElement);
 
         //navigam catre un url
         pageMethods.NavigateToPage("https://demo.automationtesting.in/Alerts.html");
 
-        List<WebElement> AlertOptions = getDriver().findElements(By.cssSelector(".nav-stacked>li>a"));
+        List<WebElement> AlertOptions = driver.findElements(By.cssSelector(".nav-stacked>li>a"));
         elementMethod.ClickElement(AlertOptions.get(0));
 
-        WebElement AlertOk = getDriver().findElement(By.cssSelector("#OKTab>button"));
+        WebElement AlertOk = driver.findElement(By.cssSelector("#OKTab>button"));
         elementMethod.ClickElement(AlertOk);
 
         //interactionam cu o alerta
@@ -49,14 +51,14 @@ public class AlertTest extends ShareData {
 
         elementMethod.ClickElement(AlertOptions.get(1));
 
-        WebElement AlertOkCancel = getDriver().findElement(By.cssSelector("#CancelTab>button"));
+        WebElement AlertOkCancel = driver.findElement(By.cssSelector("#CancelTab>button"));
         elementMethod.ClickElement(AlertOkCancel);
 
         alertMethods.DismissAlert();
 
         elementMethod.ClickElement(AlertOptions.get(2));
 
-        WebElement AlertText = getDriver().findElement(By.cssSelector("#Textbox>button"));
+        WebElement AlertText = driver.findElement(By.cssSelector("#Textbox>button"));
         elementMethod.ClickElement(AlertText);
 
         alertMethods.FillAlert("test", true);
