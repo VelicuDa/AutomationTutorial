@@ -19,6 +19,7 @@ public class FrameMethods {
 
     }
     public void SwitchDefault(){
+
         driver.switchTo().defaultContent();
     }
 

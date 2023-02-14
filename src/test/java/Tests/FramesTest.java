@@ -3,7 +3,12 @@ package Tests;
 import HelpMethod.ElementMethod;
 import HelpMethod.FrameMethods;
 import HelpMethod.PageMethods;
-import ShareData.ShareData;
+import Objects.FrameObject;
+import Pages.FramePage;
+import Pages.IndexPage;
+import Pages.RegisterPage;
+
+import ShareData.Hooks;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -17,53 +22,29 @@ import java.util.List;
 import java.awt.*;
 import java.time.Duration;
 
-public class FramesTest extends ShareData {
-
+public class FramesTest extends Hooks {
     @Test
 
     public void MetodaTest() {
-        ElementMethod elementMethod = new ElementMethod(getDriver());
-        PageMethods pageMethods = new PageMethods(getDriver());
-        FrameMethods frameMethods = new FrameMethods(getDriver());
+        FrameObject frameObject = new FrameObject(TestData);
 
-        WebElement SkipSignIn = getDriver().findElement(By.id("btn2"));
-        elementMethod.ClickElement(SkipSignIn);
+        IndexPage indexPage = new IndexPage(getDriver());
+        indexPage.ClickSkipSignIn();
+        testReport.attacheReport("pass", "Click  SkipSignIn button");
 
-        //wait explicit cu conditii diferite
-
-        WebElement SwitchTo = getDriver().findElement(By.xpath("//a[text()='SwitchTo']"));
-
-        //mergem cu mouse-ul pe un anumit element
-        elementMethod.MoveToElement(SwitchTo);
-
-        WebElement FrameElement = getDriver().findElement(By.xpath("//a[text()='Frames']"));
-        elementMethod.ClickElement(FrameElement);
-
-        pageMethods.NavigateToPage("https://demo.automationtesting.in/Frames.html");
-
-        List<WebElement> FrameOptions = getDriver().findElements(By.cssSelector(".nav-tabs>li>a"));
-        elementMethod.ClickElement(FrameOptions.get(0));
-
-        //ne mutam pe un frame
-        //getDriver().switchTo().frame("singleframe");
-        frameMethods.switchframe("singleframe");
+        RegisterPage registerPage = new RegisterPage(getDriver());
+        registerPage.GoToFrame();
+        testReport.attacheReport("pass", "Go to frame");
 
 
-        //linia aceasta ne-a bagat in acest frame - in dreptunghi
+        FramePage framePage = new FramePage(getDriver());
+        framePage.SingleFrame(frameObject);
+        framePage.MultipleFrame(frameObject);
+        testReport.attacheReport("pass", "Manage multiple frames");
 
-        WebElement FirstFrame = getDriver().findElement(By.cssSelector("input[type='text']"));
-        elementMethod.FillElement(FirstFrame, "test");
 
-        frameMethods.SwitchDefault();
 
-        elementMethod.ClickElement(FrameOptions.get(1));
 
-        frameMethods.switchframe(getDriver().findElement(By.cssSelector("iframe[src='MultipleFrames.html']")));
-        frameMethods.switchframe(getDriver().findElement(By.cssSelector("iframe[src='SingleFrame.html']")));
-
-        WebElement SecondFrame = getDriver().findElement(By.cssSelector("input[type='text']"));
-        elementMethod.FillElement(SecondFrame, "test2");
-        frameMethods.SwitchDefault();
     }
 
 

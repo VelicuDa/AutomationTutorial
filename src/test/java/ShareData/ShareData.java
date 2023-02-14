@@ -17,7 +17,7 @@ public class ShareData {
     }
     //folosim adnotarea de @before din TestNG
 
-    @BeforeMethod
+
     public void Setup(){
 
         System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chromedriver.exe");
@@ -31,7 +31,7 @@ public class ShareData {
 
     //folosim @after
 
-    @AfterMethod
+
 
     public void Clear(){
 

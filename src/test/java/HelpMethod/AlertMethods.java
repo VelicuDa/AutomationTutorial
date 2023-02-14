@@ -21,8 +21,8 @@ public class AlertMethods {
     }
     public void DismissAlert(){
         WaitAlert();
-        Alert alert = driver.switchTo().alert();
-        alert.accept();
+        Alert dismiss = driver.switchTo().alert();
+        dismiss.accept();
     }
     public void FillAlert(String Value, Boolean MakeDecission) {
         WaitAlert();

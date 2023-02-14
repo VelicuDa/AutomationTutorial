@@ -12,9 +12,7 @@ import org.testng.Assert;
 import java.time.Duration;
 
 public class ElementMethod {
-
     private WebDriver driver;
-
     public ElementMethod(WebDriver driver) {
 
         this.driver = driver;
@@ -24,14 +22,11 @@ public class ElementMethod {
     public void ClickElement(WebElement Element){
         WaitElementVisible(Element);
         Element.click();
-
     }
     public void WaitElementVisible(WebElement Element){
         WebDriverWait WaitExplicit = new WebDriverWait(driver, Duration.ofSeconds(10));
         WaitExplicit.until(ExpectedConditions.visibilityOf(Element));
-
     }
-
     public void FillElement(WebElement Element, String Value){
         WaitElementVisible(Element);
         Element.sendKeys(Value);
